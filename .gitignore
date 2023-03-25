@@ -1,0 +1,11 @@
+# Ignore vendor files
+/vendor/
+
+# Ignore composer lock files
+composer.lock
+
+# Ignore cache files
+*.cache
+
+# Ignore .env file
+.env

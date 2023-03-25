@@ -1,0 +1,54 @@
+{
+    "name": "jetcod/ip-intelligence",
+    "description": "A PHP package for geolocating IP addresses and obtaining locale and language information from them.",
+    "keywords": [
+        "geolocation",
+        "IP intelligence",
+        "platform detection",
+        "language detection",
+        "locale identification",
+        "IP lookup"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^7.4",
+        "geoip2/geoip2": "^2.13",
+        "symfony/dotenv": "^5.4"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.14",
+        "mockery/mockery": "^1.5",
+        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "phpunit/phpunit": "^9.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jetcod\\IpIntelligence\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jetcod\\IpIntelligence\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Hamid Ghorashi",
+            "email": "h.ghorashi@gmail.com"
+        }
+    ],
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "7.4"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --testdox",
+        "phpstan": "vendor/bin/phpstan analyze src --level=7",
+        "cs-check": "vendor/bin/php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "vendor/bin/php-cs-fixer fix "
+    }
+}
