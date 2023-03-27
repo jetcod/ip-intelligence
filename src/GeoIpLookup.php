@@ -8,9 +8,13 @@ use GeoIp2\Record\City;
 use GeoIp2\Record\Country;
 use GeoIp2\Record\Postal;
 use Jetcod\IpIntelligence\Exceptions\InvalidIpAddressException;
+use Jetcod\IpIntelligence\Models\Language;
 
 class GeoIpLookup
 {
+    /**
+     * @var string
+     */
     protected $ipAddress;
 
     /**
@@ -83,6 +87,16 @@ class GeoIpLookup
     public function asn(): Asn
     {
         return $this->reader(GeoLite2::DB_ASN)->asn($this->ipAddress);
+    }
+
+    /**
+     * Retrive associated language model with the recognized country.
+     *
+     * @return Language
+     */
+    public function language(): Language
+    {
+        return new Language($this->country()->isoCode);
     }
 
     /**

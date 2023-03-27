@@ -11,6 +11,9 @@ class GeoLite2
     public const DB_CITY    = 'city';
     public const DB_ASN     = 'asn';
 
+    /**
+     * @var array
+     */
     protected $config;
 
     public function __construct(array $config)

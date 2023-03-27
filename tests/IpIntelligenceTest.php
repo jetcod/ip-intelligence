@@ -9,6 +9,7 @@ use GeoIp2\Record\Postal as PostalRecord;
 use Jetcod\IpIntelligence\Exceptions\InvalidIpAddressException;
 use Jetcod\IpIntelligence\GeoIpLookup;
 use Jetcod\IpIntelligence\GeoLite2;
+use Jetcod\IpIntelligence\Models\Language;
 use Mockery as m;
 
 /**
@@ -16,15 +17,16 @@ use Mockery as m;
  *
  * @coversNothing
  */
-class IpIntelligenceTest extends TestCase
+class GeoIpLookupTest extends TestCase
 {
     public function testIpWithValidIpAddressReturnsSelf()
     {
         $ipAddress      = '8.8.8.8';
         $mockedGeoLite2 = m::mock(GeoLite2::class);
-        $ipIntelligence = new GeoIpLookup($mockedGeoLite2);
+        $lookup         = new GeoIpLookup($mockedGeoLite2);
 
-        $this->assertSame($ipIntelligence, $ipIntelligence->ip($ipAddress));
+        $this->assertSame($lookup, $lookup->ip($ipAddress));
+        $this->assertInstanceOf(GeoIpLookup::class, $lookup->ip($ipAddress));
     }
 
     public function testIpWithInvalidIpAddressThrowsException()
@@ -35,8 +37,8 @@ class IpIntelligenceTest extends TestCase
         $this->expectException(InvalidIpAddressException::class);
         $this->expectExceptionMessage("The address {$ipAddress} is not a valid IP address.");
 
-        $ipIntelligence = new GeoIpLookup($mockedGeoLite2);
-        $ipIntelligence->ip($ipAddress);
+        $lookup = new GeoIpLookup($mockedGeoLite2);
+        $lookup->ip($ipAddress);
     }
 
     public function testCityReturnsCityRecord()
@@ -45,8 +47,8 @@ class IpIntelligenceTest extends TestCase
         $expectedRecord = CityRecord::class;
         $mockedGeoLite2 = $this->createGeoLite2Mock(GeoLite2::DB_CITY, $expectedRecord);
 
-        $ipIntelligence = new GeoIpLookup($mockedGeoLite2);
-        $record         = $ipIntelligence->ip($ipAddress)->city();
+        $lookup = new GeoIpLookup($mockedGeoLite2);
+        $record = $lookup->ip($ipAddress)->city();
 
         $this->assertInstanceOf($expectedRecord, $record);
     }
@@ -57,8 +59,8 @@ class IpIntelligenceTest extends TestCase
 
         $this->expectException(\BadMethodCallException::class);
 
-        $ipIntelligence = new GeoIpLookup($mockedGeoLite2);
-        $ipIntelligence->city();
+        $lookup = new GeoIpLookup($mockedGeoLite2);
+        $lookup->city();
     }
 
     public function testCountryReturnsCountryRecord()
@@ -67,8 +69,8 @@ class IpIntelligenceTest extends TestCase
         $expectedRecord = CountryRecord::class;
         $mockedGeoLite2 = $this->createGeoLite2Mock(GeoLite2::DB_COUNTRY, CountryRecord::class);
 
-        $ipIntelligence = new GeoIpLookup($mockedGeoLite2);
-        $record         = $ipIntelligence->ip($ipAddress)->country();
+        $lookup = new GeoIpLookup($mockedGeoLite2);
+        $record = $lookup->ip($ipAddress)->country();
 
         $this->assertInstanceOf($expectedRecord, $record);
     }
@@ -79,8 +81,8 @@ class IpIntelligenceTest extends TestCase
 
         $this->expectException(\BadMethodCallException::class);
 
-        $ipIntelligence = new GeoIpLookup($mockedGeoLite2);
-        $ipIntelligence->country();
+        $lookup = new GeoIpLookup($mockedGeoLite2);
+        $lookup->country();
     }
 
     public function testPostalReturnsPostalRecord()
@@ -89,8 +91,8 @@ class IpIntelligenceTest extends TestCase
         $expectedRecord = PostalRecord::class;
         $mockedGeoLite2 = $this->createGeoLite2Mock(GeoLite2::DB_CITY, $expectedRecord);
 
-        $ipIntelligence = new GeoIpLookup($mockedGeoLite2);
-        $record         = $ipIntelligence->ip($ipAddress)->postal();
+        $lookup = new GeoIpLookup($mockedGeoLite2);
+        $record = $lookup->ip($ipAddress)->postal();
 
         $this->assertInstanceOf($expectedRecord, $record);
     }
@@ -101,8 +103,8 @@ class IpIntelligenceTest extends TestCase
 
         $this->expectException(\BadMethodCallException::class);
 
-        $ipIntelligence = new GeoIpLookup($mockedGeoLite2);
-        $ipIntelligence->postal();
+        $lookup = new GeoIpLookup($mockedGeoLite2);
+        $lookup->postal();
     }
 
     public function testAsnReturnsAsnModel()
@@ -110,8 +112,8 @@ class IpIntelligenceTest extends TestCase
         $ipAddress      = '8.8.8.8';
         $mockedGeoLite2 = $this->createGeoLite2Mock(GeoLite2::DB_ASN);
 
-        $ipIntelligence = new GeoIpLookup($mockedGeoLite2);
-        $record         = $ipIntelligence->ip($ipAddress)->asn();
+        $lookup = new GeoIpLookup($mockedGeoLite2);
+        $record = $lookup->ip($ipAddress)->asn();
 
         $this->assertInstanceOf(Asn::class, $record);
     }
@@ -122,7 +124,22 @@ class IpIntelligenceTest extends TestCase
 
         $this->expectException(\BadMethodCallException::class);
 
-        $ipIntelligence = new GeoIpLookup($mockedGeoLite2);
-        $ipIntelligence->asn();
+        $lookup = new GeoIpLookup($mockedGeoLite2);
+        $lookup->asn();
+    }
+
+    public function testLanguageReturnsLanguageModel()
+    {
+        $ipAddress = '8.8.8.8';
+
+        $countryRecord          = m::mock(CountryRecord::class);
+        $countryRecord->isoCode = 'US';
+
+        $mockedGeoIpLookup = m::mock(GeoIpLookup::class)->makePartial();
+        $mockedGeoIpLookup->shouldReceive('country')->andReturn($countryRecord);
+
+        $language = $mockedGeoIpLookup->ip($ipAddress)->language();
+
+        $this->assertInstanceOf(Language::class, $language);
     }
 }
