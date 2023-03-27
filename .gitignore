@@ -1,5 +1,6 @@
-# Ignore vendor files
+# Ignore vendor and node_modules files
 /vendor/
+/node_modules/
 
 # Ignore composer lock files
 composer.lock
