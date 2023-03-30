@@ -12,6 +12,16 @@ class GeoLite2
     public const DB_ASN     = 'asn';
 
     /**
+     * Configuration parameters.
+     *
+     * array[
+     *     'databases' => array[
+     *         self::DB_COUNTRY => string, // File path for the country database
+     *         self::DB_CITY => string, // File path for the city database
+     *         self::DB_ASN => string // File path for the ASN database
+     *     ]
+     * ]
+     *
      * @var array
      */
     protected $config;
@@ -21,6 +31,9 @@ class GeoLite2
         $this->config = $config;
     }
 
+    /**
+     * Loads a reader for the GeoIP2 database format.
+     */
     public function load(string $dbName): Reader
     {
         $config = $this->validatedConfig($dbName);
@@ -28,11 +41,26 @@ class GeoLite2
         return $this->buildDbReader($config['databases'][$dbName]);
     }
 
-    protected function buildDbReader(string $name): Reader
+    /**
+     * Instanciates a reader for the GeoIP2 database format.
+     *
+     * @param string $filename the path to the GeoIP2 database file
+     */
+    protected function buildDbReader(string $filename): Reader
     {
-        return new Reader($name);
+        return new Reader($filename);
     }
 
+    /**
+     * Validates the configuration array for a given database name.
+     *
+     * @param string $dbName the name of the database to validate the configuration for
+     *
+     * @return array the validated configuration array
+     *
+     * @throws \InvalidArgumentException if the configuration array has a missing 'databases' key, if the specified database name is invalid, or if the configuration array is missing the specified database name as a key
+     * @throws DatabaseNotFoundException if the specified database file does not exist
+     */
     protected function validatedConfig(string $dbName): array
     {
         $validKeys = [self::DB_COUNTRY, self::DB_CITY, self::DB_ASN];
