@@ -44,7 +44,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Jetcod\\IpIntelligence\\IpIntelligenceServiceProvider"
+                "Jetcod\\IpIntelligence\\ServiceProvider"
             ],
             "aliases": {
                 "Browscap": "Jetcod\\IpIntelligence\\Facades\\IpIntelligence"
