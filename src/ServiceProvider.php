@@ -28,12 +28,12 @@ class ServiceProvider extends IlluminateServiceProvider
             return new GeoLite2(config('IpIntelligence.GeoLite2'));
         });
 
-        $this->app->bind('IpIntelligence:data-install', function () {
+        $this->app->bind('command.ipintelligence.install', function () {
             return new InstallCommand();
         });
 
         $this->commands([
-            'command.ip-intelligence.install',
+            'command.ipintelligence.install',
         ]);
     }
 }
