@@ -3,6 +3,7 @@
 namespace Jetcod\IpIntelligence;
 
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
+use Jetcod\IpIntelligence\Console\InstallCommand;
 
 class ServiceProvider extends IlluminateServiceProvider
 {
@@ -26,5 +27,13 @@ class ServiceProvider extends IlluminateServiceProvider
         $this->app->singleton(GeoLite2::class, function () {
             return new GeoLite2(config('IpIntelligence.GeoLite2'));
         });
+
+        $this->app->bind('IpIntelligence:data-install', function () {
+            return new InstallCommand();
+        });
+
+        $this->commands([
+            'command.ip-intelligence.install',
+        ]);
     }
 }

@@ -14,8 +14,9 @@
     "require": {
         "php": "^7.4|^8.0",
         "geoip2/geoip2": "^2.13",
-        "illuminate/contracts": "^8.83|^9.0",
-        "illuminate/support": "^8.83|^9.0",
+        "illuminate/console": "^8.83|^10.0",
+        "illuminate/contracts": "^8.83|^10.0",
+        "illuminate/support": "^8.83|^10.0",
         "symfony/dotenv": "^5.4"
     },
     "require-dev": {
@@ -52,13 +53,6 @@
         "sort-packages": true
     },
     "scripts": {
-        "post-install-cmd": [
-            "@php artisan vendor:publish --tag=ip-intelligence",
-            "npm install cldr-core:^42.0"
-        ],
-        "post-update-cmd": [
-            "npm update cldr-core"
-        ],
         "test": "vendor/bin/phpunit --testdox",
         "phpstan": "vendor/bin/phpstan analyze src --level=7",
         "cs-check": "vendor/bin/php-cs-fixer fix --dry-run --diff",
