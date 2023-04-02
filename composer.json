@@ -14,6 +14,8 @@
     "require": {
         "php": "^7.4",
         "geoip2/geoip2": "^2.13",
+        "illuminate/contracts": "^8.83",
+        "illuminate/support": "^8.83",
         "symfony/dotenv": "^5.4"
     },
     "require-dev": {
@@ -39,6 +41,16 @@
             "email": "h.ghorashi@gmail.com"
         }
     ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jetcod\\IpIntelligence\\IpIntelligenceServiceProvider"
+            ],
+            "aliases": {
+                "Browscap": "Jetcod\\IpIntelligence\\Facades\\IpIntelligence"
+            }
+        }
+    },
     "config": {
         "sort-packages": true,
         "platform": {

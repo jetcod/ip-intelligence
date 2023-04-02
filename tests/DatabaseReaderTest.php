@@ -15,7 +15,7 @@ use Mockery as m;
 class DatabaseReaderTest extends TestCase
 {
     protected $validConfig = [
-        'databases' => [
+        'paths' => [
             GeoLite2::DB_COUNTRY => __DIR__ . '/data/GeoIP2-Country.mmdb',
             GeoLite2::DB_CITY    => __DIR__ . '/data/GeoIP2-City.mmdb',
             GeoLite2::DB_ASN     => __DIR__ . '/data/GeoLite2-ASN.mmdb',
@@ -52,7 +52,7 @@ class DatabaseReaderTest extends TestCase
     public function testLoadWithMissingDbNameKeyThrowsException()
     {
         $config = $this->validConfig;
-        unset($config['databases'][GeoLite2::DB_ASN]);  // Remove a valid key
+        unset($config['paths'][GeoLite2::DB_ASN]);  // Remove a valid key
 
         $geoLite2 = new GeoLite2($config);
 

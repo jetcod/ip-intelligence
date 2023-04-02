@@ -15,10 +15,10 @@ class GeoLite2
      * Configuration parameters.
      *
      * array[
-     *     'databases' => array[
-     *         self::DB_COUNTRY => string, // File path for the country database
-     *         self::DB_CITY => string, // File path for the city database
-     *         self::DB_ASN => string // File path for the ASN database
+     *     'paths' => array[
+     *         'country' => string, // File path for the country database
+     *         'city'    => string, // File path for the city database
+     *         'asn'     => string, // File path for the ASN database
      *     ]
      * ]
      *
@@ -38,7 +38,7 @@ class GeoLite2
     {
         $config = $this->validatedConfig($dbName);
 
-        return $this->buildDbReader($config['databases'][$dbName]);
+        return $this->buildDbReader($config['paths'][$dbName]);
     }
 
     /**
@@ -65,19 +65,19 @@ class GeoLite2
     {
         $validKeys = [self::DB_COUNTRY, self::DB_CITY, self::DB_ASN];
 
-        if (!isset($this->config['databases']) || !is_array($this->config['databases'])) {
-            throw new \InvalidArgumentException('The config has missing key `databases`.');
+        if (!isset($this->config['paths']) || !is_array($this->config['paths'])) {
+            throw new \InvalidArgumentException('The config has missing key `paths`.');
         }
 
         if (!in_array($dbName, $validKeys)) {
             throw new \InvalidArgumentException(sprintf('Database key `%s` is invalid.', $dbName));
         }
 
-        if (!isset($this->config['databases'][$dbName])) {
+        if (!isset($this->config['paths'][$dbName])) {
             throw new \InvalidArgumentException(sprintf('The key %s is expected in configuration array.', $dbName));
         }
 
-        if (!is_file($this->config['databases'][$dbName])) {
+        if (!is_file($this->config['paths'][$dbName])) {
             throw new DatabaseNotFoundException(sprintf('%s database file does not exist.', $dbName));
         }
 
