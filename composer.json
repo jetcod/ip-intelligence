@@ -53,10 +53,11 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "cd $(pwd) && npm install"
+            "@php artisan vendor:publish --tag=ip-intelligence",
+            "npm install cldr-core:^42.0"
         ],
         "post-update-cmd": [
-            "cd $(pwd) && npm update"
+            "npm update cldr-core"
         ],
         "test": "vendor/bin/phpunit --testdox",
         "phpstan": "vendor/bin/phpstan analyze src --level=7",
