@@ -45,16 +45,19 @@
         "laravel": {
             "providers": [
                 "Jetcod\\IpIntelligence\\ServiceProvider"
-            ],
-            "aliases": {
-                "Browscap": "Jetcod\\IpIntelligence\\Facades\\IpIntelligence"
-            }
+            ]
         }
     },
     "config": {
         "sort-packages": true
     },
     "scripts": {
+        "post-install-cmd": [
+            "cd $(pwd) && npm install"
+        ],
+        "post-update-cmd": [
+            "cd $(pwd) && npm update"
+        ],
         "test": "vendor/bin/phpunit --testdox",
         "phpstan": "vendor/bin/phpstan analyze src --level=7",
         "cs-check": "vendor/bin/php-cs-fixer fix --dry-run --diff",

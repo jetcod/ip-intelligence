@@ -21,10 +21,10 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/config/IpIntelligence.php', 'GeoLite2');
+        $this->mergeConfigFrom(__DIR__ . '/config/IpIntelligence.php', 'IpIntelligence');
 
         $this->app->singleton(GeoLite2::class, function () {
-            return new GeoLite2(config('GeoLite2'));
+            return new GeoLite2(config('IpIntelligence.GeoLite2'));
         });
     }
 }
