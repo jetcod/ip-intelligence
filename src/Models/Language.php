@@ -3,6 +3,7 @@
 namespace Jetcod\IpIntelligence\Models;
 
 use Jetcod\IpIntelligence\Exceptions\LanguageNotFoundException;
+use Symfony\Component\Dotenv\Dotenv;
 
 class Language
 {
@@ -97,8 +98,20 @@ class Language
      */
     protected function loadCldrDataSet(): array
     {
-        $territoryInfo = json_decode(file_get_contents(__DIR__ . '/../../node_modules/cldr-core/supplemental/territoryInfo.json'), true);
-        if (!isset($territoryInfo['supplemental']['territoryInfo'][$this->countryCode]['languagePopulation'])) {
+        $dotenv = new Dotenv(true);
+        $dotenv->loadEnv(__DIR__ . '/../../.env');
+
+        if (function_exists('config')) {
+            $filePath = config('IpIntelligence.cldr.datasets.territoryInfo');
+        } elseif (getenv('CLDR_DATA_TERRITORYINFO')) {
+            $filePath = getenv('CLDR_DATA_TERRITORYINFO');
+        } else {
+            throw new \RuntimeException('Could not find CLDR data file.');
+        }
+
+        $territoryInfo = json_decode(file_get_contents($filePath), true);
+        if (JSON_ERROR_NONE != json_last_error()
+            || !isset($territoryInfo['supplemental']['territoryInfo'][$this->countryCode]['languagePopulation'])) {
             throw new LanguageNotFoundException("There is no language associated with country code {$this->countryCode}.");
         }
 
