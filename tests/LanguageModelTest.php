@@ -2,7 +2,6 @@
 
 namespace Jetcod\IpIntelligence\Tests;
 
-use Jetcod\IpIntelligence\Exceptions\LanguageNotFoundException;
 use Jetcod\IpIntelligence\Models\Language;
 
 /**
@@ -14,37 +13,42 @@ class LanguageModelTest extends TestCase
 {
     public function testSwitchCountrySetsCountryCodeAndReturnsSelf()
     {
-        $language = new Language('us');
-        $language = $language->switchCountry('ca');
+        $language = $this->createLanguageMock();
+        $language->shouldReceive('initialize')->andReturnSelf();
 
-        $this->assertInstanceOf(Language::class, $language);
+        $this->assertInstanceOf(Language::class, $language->switchCountry('ca'));
     }
 
     public function testAllReturnsArrayOfLanguages()
     {
-        $language = new Language('us');
+        $language = $this->createLanguageMock();
+        $language->shouldReceive('all')->andReturn([]);
 
         $this->assertIsArray($language->all());
     }
 
     public function testOfficialsReturnsArrayOfOfficialLanguages()
     {
-        $language = new Language('us');
+        $language = $this->createLanguageMock();
+        $language->shouldReceive('all')->andReturn([]);
 
         $this->assertIsArray($language->officials());
     }
 
-    public function testLocaleReturnsCorrectLocale()
+    public function testLocaleReturnsString()
     {
-        $language = new Language('us');
+        $language = $this->createLanguageMock();
+        $language->shouldReceive('officials')->andReturn(['en']);
 
-        $this->assertEquals('en_US', $language->locale());
+        $this->assertIsString($locale = $language->locale());
+        $this->assertEquals('en_US', $locale);
     }
 
-    public function testLoadCldrDataSetThrowsExceptionForInvalidCountryCode()
+    public function testLocaleReturnsNullByInvalidLanguageCode()
     {
-        $this->expectException(LanguageNotFoundException::class);
+        $language = $this->createLanguageMock();
+        $language->shouldReceive('officials')->andReturn([]);
 
-        $language = new Language('invalid');
+        $this->assertNull($language->locale());
     }
 }

@@ -8,6 +8,7 @@ use GeoIp2\Model\City as CityModel;
 use GeoIp2\Model\Country as CountryModel;
 use GeoIp2\Record\Postal as PostalRecord;
 use Jetcod\IpIntelligence\GeoLite2;
+use Jetcod\IpIntelligence\Models\Language;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Mockery as m;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
@@ -83,5 +84,13 @@ class TestCase extends PHPUnitTestCase
         $property->setValue($object, $val);
 
         return $object;
+    }
+
+    protected function createLanguageMock()
+    {
+        $language = m::mock(Language::class)->makePartial();
+        $this->setProtectedAttribute($language, 'countryCode', 'US');
+
+        return $language;
     }
 }

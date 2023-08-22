@@ -137,6 +137,7 @@ class GeoIpLookupTest extends TestCase
 
         $mockedGeoIpLookup = m::mock(GeoIpLookup::class)->makePartial();
         $mockedGeoIpLookup->shouldReceive('country')->andReturn($countryRecord);
+        $mockedGeoIpLookup->shouldReceive('language')->andReturn($this->createLanguageMock());
 
         $language = $mockedGeoIpLookup->ip($ipAddress)->language();
 
