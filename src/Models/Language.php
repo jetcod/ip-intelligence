@@ -76,13 +76,13 @@ class Language
     /**
      * Initialize language class.
      */
-    protected function initialize(): self
+    public function initialize(): self
     {
         $territoryInfo = $this->loadCldrDataSet();
 
         foreach ($territoryInfo as $lang => $values) {
             if (isset($values['_officialStatus'])
-                && ('official' == $values['_officialStatus'] || 'de_facto_official' == $values['_officialStatus'])) {
+            && ('official' == $values['_officialStatus'] || 'de_facto_official' == $values['_officialStatus'])) {
                 $this->officialLanguages[] = $lang;
             }
             $this->languages[] = $lang;
