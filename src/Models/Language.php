@@ -99,14 +99,21 @@ class Language
     protected function loadCldrDataSet(): array
     {
         $dotenv = new Dotenv(true);
-        $dotenv->loadEnv(__DIR__ . '/../../.env');
+
+        if (function_exists('base_path')) {
+            $dotenv->loadEnv(base_path() . '/.env');
+        } else {
+            $dotenv->loadEnv(__DIR__ . '/../../../../../.env');
+        }
 
         if (function_exists('config')) {
             $filePath = config('IpIntelligence.cldr.datasets.territoryInfo');
-        } elseif (getenv('CLDR_DATA_TERRITORYINFO')) {
-            $filePath = getenv('CLDR_DATA_TERRITORYINFO');
         } else {
-            throw new \RuntimeException('Could not find CLDR data file.');
+            $filePath = getenv('CLDR_DATA_TERRITORYINFO');
+        }
+
+        if (!is_file($filePath)) {
+            throw new \RuntimeException('Could not find CLDR data file. Please check the environment variable CLDR_DATA_TERRITORYINFO and update the path.');
         }
 
         $territoryInfo = json_decode(file_get_contents($filePath), true);
