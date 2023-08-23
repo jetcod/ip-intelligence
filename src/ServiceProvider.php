@@ -14,7 +14,7 @@ class ServiceProvider extends IlluminateServiceProvider
     {
         $this->publishes([
             __DIR__ . '/config/IpIntelligence.php' => config_path('IpIntelligence.php'),
-        ], 'ip-intelligence');
+        ], 'ip-intelligence-config');
     }
 
     /**

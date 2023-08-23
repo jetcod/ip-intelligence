@@ -56,6 +56,9 @@
         "test": "vendor/bin/phpunit --testdox",
         "phpstan": "vendor/bin/phpstan analyze src --level=7",
         "cs-check": "vendor/bin/php-cs-fixer fix --dry-run --diff",
-        "cs-fix": "vendor/bin/php-cs-fixer fix "
+        "cs-fix": "vendor/bin/php-cs-fixer fix ",
+        "post-require-cmd": [
+            "php artisan vendor:publish --tag=ip-intelligence-config --provider=Jetcod\\IpIntelligence\\ServiceProvider"
+        ]
     }
 }
