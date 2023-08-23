@@ -1,13 +1,13 @@
 # IP-Intelligence
 
 ## Overview
-IP-Intelligence is a PHP library for IP address intelligence analysis. The library allows you to retrieve information about an IP address such as its geolocation, ISP, ASN, and more. It can can also be used to detect language and locale of an IP address. 
+IP-Intelligence is a versatile PHP library designed for comprehensive IP address intelligence analysis. Powered by the robust MaxMind database and seamlessly integrated with the CLDR (Common Locale Data Repository) package, this library empowers you to extract a wealth of information from an IP address. Whether you need to uncover geolocation data, ASN (Autonomous System Number) information, or even detect the language and locale associated with an IP address, IP-Intelligence provides the essential tools to enrich your data analysis and decision-making processes.
 
 ## Requirements
 This library requires:
 
 - php7.4 or 8.0+
-- Maxmind Db (available at [here](https://dev.maxmind.com/geoip))
+- Maxmind Db (available at [MaxMind Website](https://dev.maxmind.com/geoip))
 
 Once you installed Maxmind Db you will have 3 database files as follows:
 
