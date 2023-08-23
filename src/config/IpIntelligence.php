@@ -20,7 +20,7 @@ return [
 
     'cldr' => [
         'datasets' => [
-            'territoryInfo' => env('CLDR_DATA_TERRITORYINFO'),
+            'territoryInfo' => env('CLDR_DATA_TERRITORYINFO', 'node_modules/cldr-core/supplemental/territoryInfo.json'),
         ],
     ],
 ];
