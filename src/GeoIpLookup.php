@@ -91,8 +91,6 @@ class GeoIpLookup
 
     /**
      * Retrive associated language model with the recognized country.
-     *
-     * @return Language
      */
     public function language(): Language
     {
