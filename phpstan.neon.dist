@@ -7,8 +7,4 @@ parameters:
 	errorFormat: table
 	editorUrl: 'vscode://file/%%file%%:%%line%%'
 	inferPrivatePropertyTypeFromConstructor: true
-	checkMissingIterableValueType: false
-	ignoreErrors:
-		- '#Function config not found.#'
-		- '#Function config_path not found.#'
-		- '#Function base_path not found.#'
+	checkMissingIterableValueType: false	
