@@ -99,7 +99,7 @@ class Language
      */
     protected function loadCldrDataSet(): array
     {
-        $dotenv = new Dotenv();
+        $dotenv = new Dotenv('1');
 
         if (function_exists('base_path')) {
             $dotenv->loadEnv(base_path() . '/.env');
