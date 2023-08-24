@@ -12,16 +12,16 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^7.3|^8.0",
         "ext-intl": "*",
         "geoip2/geoip2": "^2.13",
-        "illuminate/console": "^8.83|^9.47",
-        "illuminate/contracts": "^8.83|^9.47",
-        "illuminate/support": "^8.83|^9.47",
+        "symfony/console": "^4.4|^6.0",
+        "illuminate/contracts": "^6.20|^9.47",
+        "illuminate/support": "^6.20|^9.47",
         "symfony/dotenv": "^5.4"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.14",
+        "friendsofphp/php-cs-fixer": "^3.4",
         "mockery/mockery": "^1.5",
         "phpstan/phpstan": "^1.10",
         "phpstan/phpstan-phpunit": "^1.3",
