@@ -24,7 +24,7 @@ class InstallCommand extends Command
      */
     protected $description = 'Install GeoLite2 and Cldr databases.';
 
-    public function handle()
+    public function handle(): void
     {
         if ($this->SetGeolite2MmdbPath() && $this->InstallCldrData()) {
             $this->line('');
@@ -64,7 +64,7 @@ class InstallCommand extends Command
         return true;
     }
 
-    protected function updateEnvironmentVariable(string $key, string $value)
+    protected function updateEnvironmentVariable(string $key, string $value): void
     {
         if (File::exists(base_path('.env'))) {
             $envFile     = base_path('.env');

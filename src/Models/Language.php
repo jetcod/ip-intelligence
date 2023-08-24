@@ -95,10 +95,11 @@ class Language
      * Load Cldr data set.
      *
      * @throws LanguageNotFoundException Throws exception if and invalid country code is set
+     * @throws \RuntimeException         Throws exception if CLDR data file is not readable
      */
     protected function loadCldrDataSet(): array
     {
-        $dotenv = new Dotenv(true);
+        $dotenv = new Dotenv();
 
         if (function_exists('base_path')) {
             $dotenv->loadEnv(base_path() . '/.env');
@@ -116,10 +117,15 @@ class Language
             throw new \RuntimeException('Could not find CLDR data file. Please check the environment variable CLDR_DATA_TERRITORYINFO and update the path.');
         }
 
-        $territoryInfo = json_decode(file_get_contents($filePath), true);
-        if (JSON_ERROR_NONE != json_last_error()
+        $fileContent = file_get_contents($filePath);
+        if (false !== $fileContent) {
+            $territoryInfo = json_decode($fileContent, true);
+            if (JSON_ERROR_NONE != json_last_error()
             || !isset($territoryInfo['supplemental']['territoryInfo'][$this->countryCode]['languagePopulation'])) {
-            throw new LanguageNotFoundException("There is no language associated with country code {$this->countryCode}.");
+                throw new LanguageNotFoundException("There is no language associated with country code {$this->countryCode}.");
+            }
+        } else {
+            throw new \RuntimeException('Could not read CLDR data file. Please check if the file is readable.');
         }
 
         return $territoryInfo['supplemental']['territoryInfo'][$this->countryCode]['languagePopulation'];

@@ -10,7 +10,7 @@ class ServiceProvider extends IlluminateServiceProvider
     /**
      * Bootstrap the application services.
      */
-    public function boot()
+    public function boot(): void
     {
         $this->publishes([
             __DIR__ . '/config/IpIntelligence.php' => config_path('IpIntelligence.php'),
@@ -20,7 +20,7 @@ class ServiceProvider extends IlluminateServiceProvider
     /**
      * Register the application services.
      */
-    public function register()
+    public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/config/IpIntelligence.php', 'IpIntelligence');
 
