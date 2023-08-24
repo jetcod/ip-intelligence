@@ -25,6 +25,9 @@
         "phpstan/phpstan-phpunit": "^1.3",
         "phpunit/phpunit": "^9.6"
     },
+    "suggest": {
+        "symfony/filesystem": "Required to handle filesystem errors (>5.4)"
+    },
     "autoload": {
         "psr-4": {
             "Jetcod\\IpIntelligence\\": "src/"
