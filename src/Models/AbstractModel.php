@@ -8,6 +8,8 @@ abstract class AbstractModel
 {
     /**
      * Load Cldr data set.
+     *
+     * @return mixed
      */
     abstract protected function loadData();
 
@@ -15,6 +17,8 @@ abstract class AbstractModel
      * Read data file content.
      *
      * @return mixed
+     *
+     * @throws \RuntimeException If CLDR data file not found
      */
     protected function readFile(string $name)
     {
@@ -37,6 +41,8 @@ abstract class AbstractModel
 
     /**
      * Get project root.
+     *
+     * @throws \RuntimeException If cannot make path to the root of the project
      */
     protected function root(): string
     {
@@ -44,6 +50,11 @@ abstract class AbstractModel
             return base_path();
         }
 
-        return realpath(__DIR__ . '/../../../../..');
+        $root = realpath(__DIR__ . '/../../../../../');
+        if (false === $root) {
+            throw new \RuntimeException('Could not recognize project root.');
+        }
+
+        return $root;
     }
 }
