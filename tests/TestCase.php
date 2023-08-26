@@ -86,10 +86,20 @@ class TestCase extends PHPUnitTestCase
         return $object;
     }
 
+    protected function getProtectedAttribute($object, $attr)
+    {
+        $reflectionClass = new \ReflectionClass($object);
+        $property        = $reflectionClass->getProperty($attr);
+        $property->setAccessible(true);
+
+        return $property->getValue($object);
+    }
+
     protected function createLanguageMock()
     {
         $language = m::mock(Language::class)->makePartial();
         $this->setProtectedAttribute($language, 'countryCode', 'US');
+        $language->shouldAllowMockingProtectedMethods();
 
         return $language;
     }
