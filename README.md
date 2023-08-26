@@ -1,5 +1,12 @@
 # IP-Intelligence
 
+[![Actions Status](https://github.com/jetcod/ip-intelligence/actions/workflows/php.yml/badge.svg?style=for-the-badge&label=%3Cb%3EBuild%3C/b%3E)](https://github.com/jetcod/ip-intelligence/actions)
+
+
+[![Latest Stable Version](https://poser.pugx.org/jetcod/ip-intelligence/v?style=for-the-badge)](https://packagist.org/packages/jetcod/ip-intelligence)
+[![License](http://poser.pugx.org/jetcod/ip-intelligence/license?style=for-the-badge)](https://packagist.org/packages/jetcod/ip-intelligence)
+
+
 ## Overview
 IP-Intelligence is a versatile PHP library designed for comprehensive IP address intelligence analysis. Powered by the robust MaxMind database and seamlessly integrated with the CLDR (Common Locale Data Repository) package, this library empowers you to extract a wealth of information from an IP address. Whether you need to uncover geolocation data, ASN (Autonomous System Number) information, or even detect the language and locale associated with an IP address, IP-Intelligence provides the essential tools to enrich your data analysis and decision-making processes.
 
