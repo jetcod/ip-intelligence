@@ -24,7 +24,7 @@ abstract class AbstractModel
         if (function_exists('config')) {
             $filePath = rtrim(config('IpIntelligence.cldr.path'), DIRECTORY_SEPARATOR);
         } else {
-            $filePath = getenv('CLDR_DATA_LIBRARY') ?? $this->root() . DIRECTORY_SEPARATOR . 'node_modules/cldr-core';
+            $filePath = getenv('CLDR_DATA_LIBRARY') ?: $this->root() . DIRECTORY_SEPARATOR . 'node_modules/cldr-core';
         }
         $filePath .= DIRECTORY_SEPARATOR . 'supplemental' . DIRECTORY_SEPARATOR . $name;
 
