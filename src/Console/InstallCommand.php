@@ -3,6 +3,7 @@
 namespace Jetcod\IpIntelligence\Console;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
@@ -26,6 +27,8 @@ class InstallCommand extends Command
 
     public function handle(): void
     {
+        Artisan::call('vendor:publish', ['--tag' => 'ip-intelligence-config']);
+
         if ($this->SetGeolite2MmdbPath() && $this->InstallCldrData()) {
             $this->line('');
             $this->info('Setup completed successfully!');

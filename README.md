@@ -30,13 +30,7 @@ composer require jetcod/ip-intelligence
 This will fetch and install the necessary package files.
 
 ### Step 2: Configuration 
-IP-Intelligence requires configuration to work effectively. This library offers an artisan command tailored for Laravel projects, streamlining the installation and configuration of necessary databases. To initiate this process, first publish the vendor configuration file.
-
-```bash
-php artisan vendor:publish --tag=ip-intelligence-config
-```
-
-Then execute the artisan command:
+IP-Intelligence requires configuration to work effectively. This library offers an artisan command tailored for Laravel projects, streamlining the installation and configuration of necessary databases. To kickstart this process, simply execute the following artisan command:
 
 ```bash
 php artisan IpIntelligence:data-install
