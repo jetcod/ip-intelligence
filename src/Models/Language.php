@@ -3,9 +3,8 @@
 namespace Jetcod\IpIntelligence\Models;
 
 use Jetcod\IpIntelligence\Exceptions\LanguageNotFoundException;
-use Symfony\Component\Dotenv\Dotenv;
 
-class Language
+class Language extends AbstractModel
 {
     /**
      * @var array
@@ -76,9 +75,9 @@ class Language
     /**
      * Initialize language class.
      */
-    public function initialize(): self
+    protected function initialize(): self
     {
-        $territoryInfo = $this->loadCldrDataSet();
+        $territoryInfo = $this->loadData();
 
         foreach ($territoryInfo as $lang => $values) {
             if (isset($values['_officialStatus'])
@@ -97,28 +96,9 @@ class Language
      * @throws LanguageNotFoundException Throws exception if and invalid country code is set
      * @throws \RuntimeException         Throws exception if CLDR data file is not readable
      */
-    protected function loadCldrDataSet(): array
+    protected function loadData(): array
     {
-        $dotenv = new Dotenv('1');
-
-        if (function_exists('base_path')) {
-            $dotenv->loadEnv(base_path() . '/.env');
-        } else {
-            $dotenv->loadEnv(__DIR__ . '/../../../../../.env');
-        }
-
-        if (function_exists('config')) {
-            $filePath = config('IpIntelligence.cldr.datasets.territoryInfo');
-        } else {
-            $filePath = getenv('CLDR_DATA_TERRITORYINFO');
-        }
-
-        if (!is_file($filePath)) {
-            throw new \RuntimeException('Could not find CLDR data file. Please check the environment variable CLDR_DATA_TERRITORYINFO and update the path.');
-        }
-
-        $fileContent = file_get_contents($filePath);
-        if (false !== $fileContent) {
+        if (false !== $fileContent = $this->readFile('territoryInfo.json')) {
             $territoryInfo = json_decode($fileContent, true);
             if (JSON_ERROR_NONE != json_last_error()
             || !isset($territoryInfo['supplemental']['territoryInfo'][$this->countryCode]['languagePopulation'])) {
