@@ -1,0 +1,34 @@
+name: Deploy documentation to Pages
+
+on:
+  push:
+    branches:
+      - documentation
+
+# Cancel any in-progress job or run
+# https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#concurrency
+concurrency:
+  group: gh-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pages:
+    runs-on: ubuntu-22.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+      contents: write
+    steps:
+    - id: deployment
+      uses: sphinx-notes/pages@v3
+      with:
+        publish: true
+        documentation_path: ./source
+        requirements_path: ./source/requirements.txt
+    - uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ${{ steps.deployment.outputs.artifact }}

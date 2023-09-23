@@ -1,0 +1,5 @@
+sphinx_typo3_theme
+sphinx-copybutton
+sphinx-notfound-page
+sphinx-sitemap
+sphinx-last-updated-by-git
