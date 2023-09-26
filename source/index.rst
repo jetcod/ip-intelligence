@@ -1,20 +1,13 @@
-.. IP Intelligence documentation master file, created by
-   sphinx-quickstart on Sun Sep 24 00:40:27 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+PHP GeoIP Locale and Language Package
+=====================================
 
-Welcome to IP Intelligence's documentation!
-===========================================
+.. image:: _static/images/geolocation.jpg
+   :align: center
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 1
+   :caption: Table of Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   overview.rst
+   requirements.rst
+   how_to_install.rst
