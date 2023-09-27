@@ -1,3 +1,4 @@
+sphinx_material
 sphinx-copybutton
 sphinx-notfound-page
 sphinx-sitemap
