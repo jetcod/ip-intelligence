@@ -51,7 +51,6 @@ html_theme_options = {
 
     'html_minify': True,
     'css_minify': True,
-    'logo': False,
     'logo_icon': '&#xe869',
 
     'repo_type': 'github',

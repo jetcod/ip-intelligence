@@ -11,3 +11,4 @@ PHP GeoIP Locale and Language Package
    overview.rst
    requirements.rst
    how_to_install.rst
+   how_to_use.rst
