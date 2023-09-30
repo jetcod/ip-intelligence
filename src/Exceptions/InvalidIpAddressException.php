@@ -2,6 +2,4 @@
 
 namespace Jetcod\IpIntelligence\Exceptions;
 
-class InvalidIpAddressException extends \InvalidArgumentException
-{
-}
+class InvalidIpAddressException extends \InvalidArgumentException {}

@@ -2,6 +2,4 @@
 
 namespace Jetcod\IpIntelligence\Exceptions;
 
-class LanguageNotFoundException extends \Exception
-{
-}
+class LanguageNotFoundException extends \Exception {}

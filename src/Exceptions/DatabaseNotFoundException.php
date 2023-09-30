@@ -2,6 +2,4 @@
 
 namespace Jetcod\IpIntelligence\Exceptions;
 
-class DatabaseNotFoundException extends \Exception
-{
-}
+class DatabaseNotFoundException extends \Exception {}

@@ -24,6 +24,8 @@ Once you installed Maxmind Db you will have 3 database files as follows:
 
 Keep the path to each file for further installation.
 
+For comprehensive guidance on the installation procedure and requirements, kindly consult the [documentation website](https://jetcod.github.io/ip-intelligence/requirements.html).
+
 ## Installation Guide
 
 ### Step1: Composer Installation
