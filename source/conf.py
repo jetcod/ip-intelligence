@@ -27,6 +27,9 @@ html_copy_source = False
 html_theme = 'sphinx_material'
 html_static_path = ['_static']
 
+html_sidebars = {
+    "**": ["globaltoc.html", "localtoc.html", "searchbox.html"]
+}
 html_show_sphinx = False
 
 html_theme_options = {
