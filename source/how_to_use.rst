@@ -4,19 +4,20 @@ How to Use?
 ***********
 
 
-The `jetcod/ip-intelligence` package provides a comprehensive solution for performing IP address lookups and obtaining valuable geographical and language-related information. This documentation outlines the available methods and their functionality.
+The ``jetcod/ip-intelligence`` package provides a comprehensive solution for performing IP address lookups and obtaining valuable geographical and language-related information. This documentation outlines the available methods and their functionality.
 
 
 IP Lookup
 =========
 
 
-ip($address)
-------------
+Set IP Address
+--------------
 
 The ``ip()`` method is employed to instantiate the ``GeoIpLookup`` object with a valid IP address. Subsequently, you can utilize additional methods to retrieve valuable information associated with the IP address.
 
 .. code-block:: php
+    :caption: example: 
 
     <?php
 
@@ -24,12 +25,20 @@ The ``ip()`` method is employed to instantiate the ``GeoIpLookup`` object with a
     $ip = $lookup->ip($address);
 
 
-country()
----------
+.. note:: 
+   The code example also includes error handling for potential exceptions:
+
+   - InvalidIpAddressException: This exception is thrown when the provided IP address is invalid.
+   - AddressNotFoundException: This exception is thrown when the IP address is not found in the database.
+
+
+Country
+-------
 
 The ``country()`` method allows you to retrieve various country-related details associated with the IP address.
 
 .. code-block:: php
+    :caption: example: 
 
     <?php
 
@@ -52,16 +61,17 @@ The ``country()`` method allows you to retrieve various country-related details 
    +------------+---------------------------------------------------------------------------------+
 
 
-city()
-------
+City
+----
 
 The ``city()`` method allows you to retrieve various city-related details associated with the IP address.
 
 .. code-block:: php
+    :caption: example:
 
     <?php
 
-    $countryName = $ip->city()->name;
+    $cityName = $ip->city()->name;
     // Returns the name of the city, e.g., 'Toronto'
 
 
@@ -81,11 +91,73 @@ The ``city()`` method allows you to retrieve various city-related details associ
    | names      | An array map where the keys are locale codes and the values are names                                                                                                      |
    +------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Error Handling
-==============
 
-The code example also includes error handling for potential exceptions:
+Postal
+------
 
-- ``InvalidIpAddressException``: This exception is thrown when the provided IP address is invalid.
+The ``postal()`` method allows you to retrieve various postal-related details associated with the IP address.
 
-- ``AddressNotFoundException``: This exception is thrown when the IP address is not found in the database.
+.. code-block:: php
+    :caption: example:
+
+    <?php
+
+    $postalCode = $ip->postal()->code;
+
+
+.. table::
+   :width: 100%
+   :align: center
+
+   +------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Attributes | Descriptions                                                                                                                                                                                                                             |
+   +============+==========================================================================================================================================================================================================================================+
+   | code       | The postal code of the location. Postal codes are not available for all countries. In some countries, this will only contain part of the postal code. This attribute is returned by all location databases and services besides Country. |
+   +------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | confidence | A value from 0-100 indicating MaxMind confidence that the postal code is correct. This attribute is only available from the Insights service and the GeoIP2 Enterprise database.                                                         |
+   +------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+Asn
+---
+
+The ``asn()`` method looks up the autonomous system number and autonomous system organization associated with IPv4 and IPv6 addresses.
+
+.. code-block:: php
+    :caption: example:
+
+    <?php
+
+    $asn = $ip->asn()->code;
+
+
+.. table::
+   :width: 100%
+   :align: center
+
+   +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | Attributes                   | Descriptions                                                                                                                                                        |
+   +==============================+=====================================================================================================================================================================+
+   | cautonomousSystemNumberode   | The autonomous system number associated with the IP address.                                                                                                        |
+   +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | autonomousSystemOrganization | The organization associated with the registered autonomous system number for the IP address.                                                                        |
+   +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | ipAddress                    | The IP address that the data in the model is for.                                                                                                                   |
+   +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+   | network                      | The network in CIDR notation associated with the record. In particular, this is the largest network where all of the fields besides $ipAddress have the same value. |
+   +------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+Language
+--------
+
+The ``language()`` allows you to get a Language model containing valuable information about the language recognized by the IP address. 
+
+.. code-block:: php
+    :caption: example:
+
+    <?php
+
+    $locale = $ip->language()->locale();
+    // Returns the locale of the recognied language, e.g., 'en_US'
+
