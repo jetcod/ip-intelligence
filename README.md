@@ -82,7 +82,7 @@ class TestController
             $allLanguages = $ip->language()->all();
             // Returns an array of all languages spoken in the region, e.g., ['ar', 'atj', 'bla', 'bn', ...]
 
-            $locale = $ip->language()->locale();
+            $locale = $ip->language()->locale;
             // Returns the locale for the region, e.g., 'en_CA'
 
             // Retrieve City Information
