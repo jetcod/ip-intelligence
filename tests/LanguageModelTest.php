@@ -192,8 +192,28 @@ class LanguageModelTest extends TestCase
     public function testLocaleReturnsNullByInvalidLanguageCode()
     {
         $language = $this->createLanguageMock();
-        $language->shouldReceive('officials')->andReturn([]);
+        $language->shouldReceive('officials')->once()->andReturn([]);
 
         $this->assertNull($language->locale());
+    }
+
+    public function testLanguageModelValidAttribute()
+    {
+        $language = $this->createLanguageMock();
+        $language->shouldReceive('locale')->once()->andReturn('en_US');
+
+        $this->assertEquals('en_US', $language->locale);
+    }
+
+    public function testLanguageModelUnknownAttribute()
+    {
+        $language = $this->createLanguageMock();
+
+        $attr = 'invalidAttribute';
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage("Unknown attribute: {$attr}");
+
+        $language->{$attr};
     }
 }

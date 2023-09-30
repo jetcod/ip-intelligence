@@ -4,6 +4,13 @@ namespace Jetcod\IpIntelligence\Models;
 
 use Jetcod\IpIntelligence\Exceptions\LanguageNotFoundException;
 
+/**
+ * The Language class serves as a model for language-related data.
+ *
+ * @property null|string $locale    The locale corresponding to the language recognized in the country.
+ * @property array       $all       An array containing all languages spoken within the specified country.
+ * @property array       $officials An array listing the official languages spoken in the specified country.
+ */
 class Language extends AbstractModel
 {
     /**
@@ -44,7 +51,7 @@ class Language extends AbstractModel
     /**
      * Returns all languages of the set country.
      */
-    public function all(): array
+    protected function all(): array
     {
         return $this->languages;
     }
@@ -52,7 +59,7 @@ class Language extends AbstractModel
     /**
      * Returns official and de facto official languages.
      */
-    public function officials(): array
+    protected function officials(): array
     {
         return $this->officialLanguages;
     }
@@ -60,7 +67,7 @@ class Language extends AbstractModel
     /**
      * Returns locale of the language.
      */
-    public function locale(): ?string
+    protected function locale(): ?string
     {
         if (count($this->officials()) < 1) {
             return null;

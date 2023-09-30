@@ -7,6 +7,18 @@ use Symfony\Component\Dotenv\Dotenv;
 abstract class AbstractModel
 {
     /**
+     * @return mixed
+     */
+    public function __get(string $attr)
+    {
+        if (method_exists($this, $attr)) {
+            return $this->{$attr}();
+        }
+
+        throw new \RuntimeException("Unknown attribute: {$attr}");
+    }
+
+    /**
      * Load Cldr data set.
      *
      * @return mixed
