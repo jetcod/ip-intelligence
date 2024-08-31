@@ -17,7 +17,7 @@ PHP GeoIP Locale and Language Package
 Overview
 ********
 
-IP-Intelligence is a flexible PHP library meticulously crafted for thorough analysis of IP addresses. Utilizing the robust MaxMind database and seamlessly incorporating the CLDR (Common Locale Data Repository) package, this library equips you with the capability to extract an extensive array of details from an IP address. Whether your requirement is to unearth geolocation data, retrieve ASN (Autonomous System Number) details, or even identify the language and locale linked to an IP address, IP-Intelligence offers indispensable resources to enhance your data analysis and decision-making endeavors.
+IP-Intelligence is a versatile PHP library designed for comprehensive IP address analysis. It leverages the powerful MaxMind database and integrates the CLDR (Common Locale Data Repository) package, allowing you to extract detailed information from IP addresses. Whether you need geolocation insights, ASN (Autonomous System Number) details, or language and locale identification, IP-Intelligence provides essential tools to enhance your data analysis and decision-making processes.
 
 .. image:: _static/images/geolocation.jpg
    :align: center
